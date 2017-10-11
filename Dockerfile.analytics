@@ -1,0 +1,19 @@
+FROM better/baseimage:alpine-3.5
+
+LABEL variant="analytics"
+
+RUN apk add --no-cache libffi-dev \
+  postgresql \
+  postgresql-client \
+  postgresql-dev \
+  postgresql-libs \
+  postgresql-contrib
+
+# Matplotlib dependencies from https://gist.github.com/orenitamar/f29fb15db3b0d13178c1c4dd611adce2
+RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+
+RUN pip install matplotlib==2.0.2 \
+psycopg2==2.7.2 \
+seaborn==0.8
