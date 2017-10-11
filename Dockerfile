@@ -1,0 +1,28 @@
+FROM alpine:3.5
+
+LABEL \
+maintainer="ivan@better.com" \
+description="Master Alpine 3.5 image"
+
+ENV USER=app GOPATH=/go LC_ALL=en_US.utf-8
+ENV PATH="${GOPATH}/bin:/usr/local/go/bin:${PATH}" DIR="/home/${USER}"
+
+# System setup
+RUN addgroup -g 1000 ${USER} && adduser -D -G ${USER} -u 1000 ${USER}
+
+# System dependencies
+RUN apk add --no-cache \
+linux-headers coreutils ca-certificates libressl libressl-dev musl-dev \
+gcc g++ python3 python3-dev \
+git curl
+
+# RDS SSL certificates
+COPY rds-combined-ca-bundle.pem /tmp
+RUN cd /tmp && \
+csplit --elide-empty-files --quiet --prefix crt rds-combined-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}' && \
+for c in /tmp/crt*; \
+do mv /$c /usr/local/share/ca-certificates/aws-rds-ca-$(basename $c).crt; done && \
+update-ca-certificates
+
+# Application dependencies
+RUN python3 -m ensurepip && pip3 install --upgrade pip setuptools
