@@ -19,10 +19,12 @@ git curl
 # RDS SSL certificates
 COPY rds-combined-ca-bundle.pem /tmp
 RUN cd /tmp && \
-csplit --elide-empty-files --quiet --prefix crt rds-combined-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}' && \
-for c in /tmp/crt*; \
-do mv /$c /usr/local/share/ca-certificates/aws-rds-ca-$(basename $c).crt; done && \
-update-ca-certificates
+  csplit --elide-empty-files --quiet --prefix crt rds-combined-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}' && \
+  for c in /tmp/crt*; \
+  do mv /$c /usr/local/share/ca-certificates/aws-rds-ca-$(basename $c).crt; done && \
+  update-ca-certificates && \
+  mkdir -p /etc/ssl && \
+  cp /tmp/rds-combined-ca-bundle.pem /etc/ssl/
 
 # Application dependencies
 RUN python3 -m ensurepip && pip3 install --upgrade pip setuptools
