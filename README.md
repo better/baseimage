@@ -1,6 +1,6 @@
 # Better base Docker images
 
-[![Docker Build Status](https://img.shields.io/docker/build/better/baseimage.svg](https://hub.docker.com/r/better/baseimage/)
+[![Docker Build Status](https://img.shields.io/docker/build/better/baseimage.svg)](https://hub.docker.com/r/better/baseimage/)
 
 ## Stable images
 
