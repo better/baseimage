@@ -3,7 +3,7 @@ FROM alpine:3.7
 LABEL \
 maintainer="ivan@better.com"
 
-ENV USER=app COMMIT=${COMMIT} GOPATH=/go LC_ALL=en_US.utf-8
+ENV USER=app GOPATH=/go LC_ALL=en_US.utf-8
 ENV PATH="${GOPATH}/bin:/usr/local/go/bin:${PATH}" DIR="/home/${USER}"
 
 # System setup
