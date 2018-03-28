@@ -1,4 +1,4 @@
-FROM better/baseimage:alpine-3.5
+FROM better/baseimage:alpine-3.7
 
 LABEL variant="analytics"
 
