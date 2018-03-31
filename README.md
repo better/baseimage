@@ -15,6 +15,10 @@ The base Alpine image sets up the `app` user and installs several useful librari
 
 The analytics image builds on the Alpine image, adding Postgres and Python data science packages.
 
+## Testing
+
+You can verify that this works by building locally, e.g. `docker build . -f Dockerfile.analytics`.
+
 ## Publishing an image
 
 The tag convention for Git and Docker is as follows: `[prefix]-[distro]-[version]`.
@@ -26,4 +30,4 @@ When a tag (e.g. `alpine-3.7`) needs to be re-published, the following should be
 * `git push origin :alpine-3.7` - this deletes the existing Git tag on remote
 * `git tag -d alpine-3.7` - this deletes the existing Git tag on local
 * `git tag alpine-3.7` - this tags master
-* `git push origin master --tags` - this pushes the new tag to remote and kicks off Docker Hub build
+* `git push origin master --tags` - this pushes the new tag to remote and kicks off Docker Hub build. Note that it can take several hours to finish.
