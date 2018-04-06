@@ -16,4 +16,5 @@ RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 RUN pip3 install matplotlib==2.0.2 \
 psycopg2==2.7.2 \
-seaborn==0.8
+seaborn==0.8 \
+pandas==0.22.0
