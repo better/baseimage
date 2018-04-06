@@ -5,7 +5,7 @@
 ## Stable images
 
 * Alpine: `better/baseimage:alpine-3.7`
-* Alpine: `better/baseimage:alpine-3.7-analytics`
+* Alpine: `better/baseimage:analytics-alpine-3.7`
 
 ## Alpine
 
@@ -14,3 +14,16 @@ The base Alpine image sets up the `app` user and installs several useful librari
 ## Analytics
 
 The analytics image builds on the Alpine image, adding Postgres and Python data science packages.
+
+## Publishing an image
+
+The tag convention for Git and Docker is as follows: `[prefix]-[distro]-[version]`.
+
+For the base image, there is no prefix, so a typical tag would be `alpine-1.0`.
+
+When a tag (e.g. `alpine-3.7`) needs to be re-published, the following should be done:
+
+* `git push origin :alpine-3.7` - this deletes the existing Git tag on remote
+* `git tag -d alpine-3.7` - this deletes the existing Git tag on local
+* `git tag alpine-3.7` - this tags master
+* `git push origin master --tags` - this pushes the new tag to remote and kicks off Docker Hub build
