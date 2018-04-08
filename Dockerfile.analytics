@@ -21,4 +21,4 @@ RUN pip3 install matplotlib==2.0.2 \
     https://erikbern.com/tensorflow-1.7.0-cp36-cp36m-linux_x86_64.whl # will move this to Github shortly
 
 # Make sure all the libraries are installed properly
-RUN python3 -c 'import matplotlib, psycopg2, seaborn, tensorflow'
+RUN python3 -c 'import matplotlib, pandas, psycopg2, seaborn, tensorflow'
