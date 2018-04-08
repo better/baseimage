@@ -18,7 +18,7 @@ RUN pip3 install matplotlib==2.0.2 \
     psycopg2==2.7.2 \
     seaborn==0.8 \
     pandas==0.22.0 \
-    https://erikbern.com/tensorflow-1.7.0-cp36-cp36m-linux_x86_64.whl # will move this to Github shortly
+    https://github.com/better/alpine-tensorflow/releases/download/alpine3.7-tensorflow1.7.0/tensorflow-1.7.0-cp36-cp36m-linux_x86_64.whl
 
 # Make sure all the libraries are installed properly
 RUN python3 -c 'import matplotlib, pandas, psycopg2, seaborn, tensorflow'
