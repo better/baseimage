@@ -13,7 +13,7 @@ The base Alpine image sets up the `app` user and installs several useful librari
 
 ## Analytics
 
-The analytics image builds on the Alpine image, adding Postgres, Tensorflow, Matplotlib, and Pandas.
+The analytics image builds on the Alpine image, adding Postgres and a number of useful Python packages (Numpy, Tensorflow, etc).
 
 ## Testing
 

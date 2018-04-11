@@ -15,10 +15,12 @@ RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libp
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 RUN pip3 install matplotlib==2.0.2 \
-    psycopg2==2.7.2 \
-    seaborn==0.8 \
     pandas==0.22.0 \
-    https://github.com/better/alpine-tensorflow/releases/download/alpine3.7-tensorflow1.7.0/tensorflow-1.7.0-cp36-cp36m-linux_x86_64.whl
+    psycopg2==2.7.2 \
+    scipy==1.0.1 \
+    seaborn==0.8 \
+    https://github.com/better/alpine-tensorflow/releases/download/alpine3.7-tensorflow1.7.0/tensorflow-1.7.0-cp36-cp36m-linux_x86_64.whl \
+    && pip3 install scikit-learn==0.19.1 # Something with scikit-learn requires it to be installed *after* scipy.
 
 # Make sure all the libraries are installed properly
-RUN python3 -c 'import matplotlib, pandas, psycopg2, seaborn, tensorflow'
+RUN python3 -c 'import matplotlib, pandas, psycopg2, seaborn, sklearn, tensorflow'
