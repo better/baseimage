@@ -11,9 +11,10 @@ RUN addgroup -g 1000 ${USER} && adduser -D -G ${USER} -u 1000 ${USER}
 
 # System dependencies
 RUN apk add --no-cache \
-linux-headers coreutils ca-certificates libressl libressl-dev musl-dev \
-gcc g++ python3 python3-dev \
-git curl
+  linux-headers coreutils ca-certificates libressl libressl-dev musl-dev g++ python3 python3-dev git curl && \
+  wget https://github.com/mozilla/sops/releases/download/3.0.5/sops-3.0.5.linux -O sops && \
+  sha1sum sops | grep 7e3ec5f8f725976c8190544f8fd71400179ba666 && \
+  chmod +x sops && mv sops /usr/local/bin
 
 # RDS SSL certificates
 COPY rds-combined-ca-bundle.pem /tmp
