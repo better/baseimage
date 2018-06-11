@@ -14,7 +14,8 @@ RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/reposit
 RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
-RUN pip3 install numpy==1.14.3 # pinning this at 1.14.3 as 1.14.4 does not compile \
+# pinning numpy at 1.14.3 as 1.14.4 does not compile
+RUN pip3 install numpy==1.14.3 \
     && pip3 install matplotlib==2.0.2 \
     pandas==0.22.0 \
     psycopg2==2.7.2 \
