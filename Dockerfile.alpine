@@ -17,7 +17,7 @@ RUN apk add --no-cache \
   chmod +x sops && mv sops /usr/local/bin
 
 # Redshift SSL certificates
-COPY redshift-ca-bundle.crt /usr/localshare/ca-certificates/redshift-ca-bundle.crt
+COPY redshift-ca-bundle.crt /usr/local/share/ca-certificates/redshift-ca-bundle.crt
 
 # RDS SSL certificates
 COPY rds-combined-ca-bundle.pem /tmp
