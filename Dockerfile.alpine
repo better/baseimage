@@ -16,18 +16,21 @@ RUN apk add --no-cache \
   sha1sum sops | grep 7e3ec5f8f725976c8190544f8fd71400179ba666 && \
   chmod +x sops && mv sops /usr/local/bin
 
-# Redshift SSL certificates
-COPY redshift-ca-bundle.crt /usr/local/share/ca-certificates/redshift-ca-bundle.crt
+# Database SSL certificates
+COPY rds-combined-ca-bundle.pem redshift-ca-bundle.crt /tmp/
+RUN mkdir -p /etc/ssl && cp /tmp/rds-combined-ca-bundle.pem /tmp/redshift-ca-bundle.crt /etc/ssl
 
-# RDS SSL certificates
-COPY rds-combined-ca-bundle.pem /tmp
+# todo: write a script for this?
 RUN cd /tmp && \
-  csplit --elide-empty-files --quiet --prefix crt rds-combined-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}' && \
-  for c in /tmp/crt*; \
-  do mv /$c /usr/local/share/ca-certificates/aws-rds-ca-$(basename $c).crt; done && \
-  update-ca-certificates && \
-  mkdir -p /etc/ssl && \
-  cp /tmp/rds-combined-ca-bundle.pem /etc/ssl/
+  csplit --elide-empty-files --quiet --prefix rds-crt rds-combined-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}' && \
+  for c in /tmp/rds-crt*; \
+  do mv /$c /usr/local/share/ca-certificates/aws-rds-ca-$(basename $c).crt; done
+RUN cd /tmp && \
+  csplit --elide-empty-files --quiet --prefix rs-crt redshift-ca-bundle.crt '/-BEGIN CERTIFICATE-/' '{*}' && \
+  for c in /tmp/rs-crt*; \
+  do mv /$c /usr/local/share/ca-certificates/redshift-ca-$(basename $c).crt; done
+
+RUN update-ca-certificates
 
 # Application dependencies
 RUN python3 -m ensurepip && pip3 install --upgrade pip setuptools
