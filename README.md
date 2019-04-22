@@ -4,8 +4,8 @@
 
 ## Stable images
 
-* Alpine: `better/baseimage:alpine-3.8`
-* Alpine: `better/baseimage:analytics-alpine-3.8`
+* Alpine: `better/baseimage:alpine-3.9`
+* Alpine: `better/baseimage:analytics-alpine-3.9`
 
 ## Alpine
 
