@@ -34,3 +34,6 @@ RUN update-ca-certificates
 
 # Application dependencies
 RUN python3 -m ensurepip && pip3 install --upgrade pip setuptools
+
+# Check for CVE-2019-5021
+RUN grep -F 'root:!::0:::::' /etc/shadow
