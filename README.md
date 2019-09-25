@@ -1,11 +1,11 @@
 # Better base Docker images
 
-[![Docker Build Status](https://img.shields.io/docker/build/better/baseimage.svg)](https://hub.docker.com/r/better/baseimage/)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/better/baseimage)](https://hub.docker.com/r/better/baseimage/)
 
 ## Stable images
 
-* Alpine: `better/baseimage:alpine-3.9`
-* Alpine: `better/baseimage:analytics-alpine-3.9`
+* Alpine: `better/baseimage:alpine-3.10`
+* Analytics: `better/baseimage:analytics-alpine-3.9`
 
 ## Alpine
 
