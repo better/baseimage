@@ -34,7 +34,9 @@ RUN update-ca-certificates
 
 # Librdkafka for event service dependents
 RUN curl -L https://github.com/edenhill/librdkafka/archive/v1.2.1.zip > librdkafka.zip && \
+  echo "8b5e95318b190f40cbcd4a86d6a59dbe57b54a920d8fdf64d9c850bdf05002ca  librdkafka.zip" | sha256sum -c - && \
   unzip librdkafka.zip && \
+  rm librdkafka.zip && \
   cd librdkafka-1.2.1 && \
   ./configure --prefix /usr && \
   make && \
