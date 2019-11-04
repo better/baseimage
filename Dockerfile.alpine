@@ -11,7 +11,7 @@ RUN addgroup -g ${USER_ID} ${USER} && adduser -D -G ${USER} -u ${USER_ID} ${USER
 
 # System dependencies
 RUN apk add --no-cache \
-  linux-headers coreutils ca-certificates openssl openssl-dev musl-dev g++ python3 python3-dev git curl && \
+  linux-headers coreutils ca-certificates openssl openssl-dev musl-dev g++ python3 python3-dev git curl bash build-base && \
   wget https://github.com/mozilla/sops/releases/download/3.3.1/sops-3.3.1.linux -O sops && \
   sha1sum sops | grep af2fc3d3a29565b0d6a73249136965ffee62892f && \
   chmod +x sops && mv sops /usr/local/bin
@@ -31,6 +31,14 @@ RUN cd /tmp && \
   do mv /$c /usr/local/share/ca-certificates/redshift-ca-$(basename $c).crt; done
 
 RUN update-ca-certificates
+
+# Librdkafka for event service dependents
+RUN curl -L https://github.com/edenhill/librdkafka/archive/v1.2.1.zip > librdkafka.zip && \
+  unzip librdkafka.zip && \
+  cd librdkafka-1.2.1 && \
+  ./configure --prefix /usr && \
+  make && \
+  make install
 
 # Application dependencies
 RUN python3 -m ensurepip && pip3 install --upgrade pip setuptools
