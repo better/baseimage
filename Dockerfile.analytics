@@ -14,15 +14,14 @@ RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/reposit
 RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
-# pinning numpy at 1.14.3 as 1.14.4 does not compile
-RUN pip3 install numpy==1.14.3 \
+RUN pip3 install numpy==1.17.0 \
     && pip3 install matplotlib==2.0.2 \
     pandas==0.24.0 \
     psycopg2==2.7.2 \
-    scipy==1.0.1 \
+    scipy==1.2.0 \
     seaborn==0.8 \
     statsmodels==0.9.0 \
     && pip3 install scikit-learn==0.19.2 # Something with scikit-learn requires it to be installed *after* scipy.
 
 # Make sure all the libraries are installed properly
-RUN python3 -c 'import matplotlib, pandas, psycopg2, seaborn, sklearn, statsmodels'
+RUN python3 -c 'import matplotlib, numpy, pandas, psycopg2, seaborn, sklearn, statsmodels'
