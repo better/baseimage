@@ -6,6 +6,7 @@
 
 * Alpine: `better/baseimage:alpine-3.10`
 * Alpine: `better/baseimage:analytics-alpine-3.9`
+* Node Alpine: `better/baseimage:node-alpine-3.10`
 
 ## Alpine
 
