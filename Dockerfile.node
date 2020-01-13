@@ -1,5 +1,8 @@
 FROM node:12-alpine3.10
 
+LABEL \
+maintainer="core-tech@better.com"
+
 COPY rds-combined-ca-bundle.pem redshift-ca-bundle.crt /tmp/
 
 RUN apk update                                                                                \

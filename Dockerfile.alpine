@@ -1,7 +1,7 @@
 FROM alpine:3.10
 
 LABEL \
-maintainer="ivan@better.com"
+maintainer="core-tech@better.com"
 
 ENV USER_ID=1000 USER=app GOPATH=/go LC_ALL=en_US.utf-8
 ENV PATH="${GOPATH}/bin:/usr/local/go/bin:${PATH}" DIR="/home/${USER}"
