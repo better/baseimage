@@ -18,7 +18,7 @@ The analytics image builds on the Alpine image, adding Postgres and a number of 
 
 ## Node Alpine
 
-The Node Alpine image is a minimal node image that has ssl certs updated and librdkafka.
+The Node Alpine image is a minimal node image that has ssl certs updated and librdkafka (no python, gcc, etc).
 
 ## Testing
 
