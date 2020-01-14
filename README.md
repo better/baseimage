@@ -16,6 +16,10 @@ The base Alpine image sets up the `app` user and installs several useful librari
 
 The analytics image builds on the Alpine image, adding Postgres and a number of useful Python packages (Numpy, Tensorflow, etc).
 
+## Node Alpine
+
+The Node Alpine image is a minimal node image that has ssl certs updated and librdkafka.
+
 ## Testing
 
 You can verify that this works by building locally, e.g. `docker build . -f Dockerfile.analytics`.
