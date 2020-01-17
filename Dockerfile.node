@@ -5,8 +5,10 @@ maintainer="core-tech@better.com"
 
 COPY rds-combined-ca-bundle.pem redshift-ca-bundle.crt /tmp/
 
+# NOTE: keeping 'make' in the baseimage allows us to use it for builds
+# TODO: write a separate "build" image, to keep the image light
 RUN apk update                                                                                \
-  && apk add --upgrade --no-cache coreutils openssl curl                                      \
+  && apk add --upgrade --no-cache coreutils openssl curl make                                 \
   && curl -o sops -L https://github.com/mozilla/sops/releases/download/3.3.1/sops-3.3.1.linux \
   && sha1sum sops | grep af2fc3d3a29565b0d6a73249136965ffee62892f                             \
   && chmod +x sops                                                                            \
